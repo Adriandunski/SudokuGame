@@ -261,4 +261,35 @@ public class Sudoku {
             System.out.println();
         }
     }
+
+    public int[][] getBoard(int i) {
+
+        int arrayCopy[][] = numbers.clone();
+
+        return getBoardWithGap(arrayCopy, i);
+    }
+
+    private int[][] getBoardWithGap(int[][] array, int miss) {
+
+        SecureRandom secureRandom = new SecureRandom();
+        int counter = 0;
+        boolean w = false;
+
+        do {
+
+            int y = secureRandom.nextInt(9);
+            int x = secureRandom.nextInt(9);
+
+            if (array[y][x] != 0){
+                array[y][x] = 0;
+                counter++;
+            }
+
+            System.out.println(counter);
+        } while (counter < miss); {
+            System.out.println("Koniec pętli");
+        }
+
+        return array;
+    }
 }

@@ -10,9 +10,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        Sudoku sudoku = new Sudoku();
-        sudoku.setValues();
-
         launch(args);
     }
 
