@@ -37,7 +37,7 @@ public class Sudoku {
                 }
             }
         } while (!isFullMap()); {
-            printValues();
+
         }
     }
 
@@ -262,14 +262,14 @@ public class Sudoku {
         }
     }
 
-    public int[][] getBoard(int i) {
+    public int[][] getBoard() {
 
-        int arrayCopy[][] = numbers.clone();
-
-        return getBoardWithGap(arrayCopy, i);
+        return numbers;
     }
 
-    private int[][] getBoardWithGap(int[][] array, int miss) {
+    public int[][] getBoardWithGap(int miss) {
+
+        int array[][] = copyArray(numbers);
 
         SecureRandom secureRandom = new SecureRandom();
         int counter = 0;
@@ -284,12 +284,23 @@ public class Sudoku {
                 array[y][x] = 0;
                 counter++;
             }
-
-            System.out.println(counter);
         } while (counter < miss); {
             System.out.println("Koniec pętli");
         }
 
         return array;
+    }
+
+    private int[][] copyArray(int[][] oldArray) {
+
+        int newArray[][] = new int[9][9];
+
+        for(int y = 0; y < 9; y++) {
+            for(int x = 0; x < 9; x++) {
+                newArray[y][x] = oldArray[y][x];
+            }
+        }
+
+        return newArray;
     }
 }

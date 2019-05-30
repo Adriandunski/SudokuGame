@@ -1,11 +1,17 @@
 package controllers;
 
 import classes.Sudoku;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXMasonryPane;
+import com.jfoenix.controls.JFXRadioButton;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -13,6 +19,21 @@ public class GameController {
 
     @FXML
     private AnchorPane mainPane;
+
+    @FXML
+    private ToggleGroup numbersRadio;
+
+    @FXML
+    private JFXCheckBox checkBoxShowMisstakes;
+
+    @FXML
+    private Label labelTime;
+
+    @FXML
+    private JFXButton buttonMenu;
+
+    @FXML
+    private JFXButton buttonShowNumber;
 
     private TextField[][] fields = new TextField[9][9];
     private String A;
@@ -23,62 +44,155 @@ public class GameController {
     private int SY = 0;
     private int FY = 3;
 
-    private int[][] ints = {{1,1,1,2,2,2,5,5,5},
-            {1,0,1,2,0,2,5,0,5},
-            {1,1,1,2,2,2,5,5,5},
-            {3,3,3,4,4,4,6,6,6},
-            {3,0,3,4,0,4,6,0,6},
-            {3,3,3,4,4,4,6,6,6},
-            {1,1,1,2,2,2,5,5,5},
-            {1,0,1,2,0,2,5,0,5},
-            {1,1,1,2,2,2,5,5,5}};
+    private int[][] ints;
+    private int[][] witoutGapInts;
 
     @FXML
     void initialize() {
 
-//       TextField textField1 = creatField();
-//       TextField textField2 = creatField();
-//
-//       masionary.getChildren().add(textField1);
-//       masionary.getChildren().add(textField2);
-
         Sudoku sudoku = new Sudoku();
         sudoku.setValues();
 
-        ints = sudoku.getBoard(20);
-
+        ints = sudoku.getBoardWithGap(5);
+        witoutGapInts = sudoku.getBoard();
 
         creatAllFields();
         putNumberstoFields();
         creatBoarder();
+        sudoku.printValues();
+        setDisableOfRadioButtons();
+    }
+
+    @FXML
+    void checkMisstakes(ActionEvent event) {
+
+        if (checkBoxShowMisstakes.isSelected()) {
+            checkCorretions();
+        } else {
+            for(int y = 0; y < 9; y++) {
+                for(int x = 0; x < 9; x++) {
+                    if (!fields[y][x].getId().equals("computerNumber")){
+                        fields[y][x].setId("emptyNumber");
+                    }
+                }
+            }
+        }
+
+        makeBorder();
+    }
+
+    @FXML
+    void changeViewNumber(ActionEvent event) {
+
+        makeBorder();
+    }
+
+    private void setDisableOfRadioButtons() {
+
+        for (int i = 0; i < 9; i++) {
+            JFXRadioButton radio = (JFXRadioButton) numbersRadio.getToggles().get(i);
+
+            int counter = 0;
+            int number = Integer.parseInt(radio.getText());
+
+            for(int y = 0; y < 9; y++) {
+                for(int x = 0; x < 9; x++) {
+
+                    try {
+                        int temp = Integer.parseInt(fields[y][x].getText());
+
+                        if(temp == number){
+                            counter++;
+                        }
+                    } catch (NumberFormatException e) {
+
+                    }
+                }
+            }
+
+            if (counter >= 9) {
+                radio.setDisable(true);
+                radio.setSelected(false);  /// Bład przy wylaczaniu powinno wyresetowac bordery we wszytkich kafelkach
+            } else {
+                radio.setDisable(false);
+            }
+        }
+    }
+
+    private void makeBorder() {
+
+        try {
+            JFXRadioButton radio = (JFXRadioButton) numbersRadio.getSelectedToggle();
+            String s = radio.getText();
+
+            for(int y = 0; y < 9; y++) {
+                for(int x = 0; x < 9; x++) {
+
+                    if (fields[y][x].getText().equals(s)) {
+                        fields[y][x].setStyle("-fx-border-color: BLACK; -fx-border-radius: 12px; -fx-border-width: 3px");
+                    } else {
+                        fields[y][x].setStyle("-fx-border-style: hidden");
+                    }
+                }
+            }
+        } catch (NullPointerException e) {
+
+        }
+    }
+
+    private void checkCorretions() {
+
+        for (int y = 0; y <  9; y++) {
+            for (int x = 0; x < 9; x++) {
+
+                if (!fields[y][x].getId().equals("computerNumber") && !fields[y][x].getText().equals("")) {
+
+                    int temp = 0;
+
+                    try {
+                        temp = Integer.parseInt(fields[y][x].getText());
+
+                        if (witoutGapInts[y][x] == Integer.parseInt(fields[y][x].getText())) {
+                            fields[y][x].setId("goodNumber");
+                        } else if (witoutGapInts[y][x] != Integer.parseInt(fields[y][x].getText())) {
+                            fields[y][x].setId("wrongNumber");
+                        }
+                    } catch (NumberFormatException e) {
+
+                    }
+                } else if (!fields[y][x].getId().equals("computerNumber") && fields[y][x].getText().equals("")) {
+                    fields[y][x].setId("emptyNumber");
+                }
+            }
+        }
     }
 
     private void creatBoarder() {
 
         mainPane.getChildren().add(creatPlane(0,0));
-        mainPane.getChildren().add(creatPlane(109,0));
-        mainPane.getChildren().add(creatPlane(218, 0));
+        mainPane.getChildren().add(creatPlane(124,0));
+        mainPane.getChildren().add(creatPlane(248, 0));
 
-        mainPane.getChildren().add(creatPlane(0,109));
-        mainPane.getChildren().add(creatPlane(109,109));
-        mainPane.getChildren().add(creatPlane(218,109));
+        mainPane.getChildren().add(creatPlane(0,124));
+        mainPane.getChildren().add(creatPlane(124,124));
+        mainPane.getChildren().add(creatPlane(248,124));
 
-        mainPane.getChildren().add(creatPlane(0,218));
-        mainPane.getChildren().add(creatPlane(109,218));
-        mainPane.getChildren().add(creatPlane(218,218));
+        mainPane.getChildren().add(creatPlane(0,248));
+        mainPane.getChildren().add(creatPlane(124,248));
+        mainPane.getChildren().add(creatPlane(248,248));
     }
 
     private JFXMasonryPane creatPlane(int x, int y) {
 
         JFXMasonryPane example = new JFXMasonryPane();
 
-        example.setLayoutX(180 + x);
-        example.setLayoutY(40 + y);
-        example.setCellWidth(30);
-        example.setCellHeight(30);
+        example.setLayoutX(215 + x);
+        example.setLayoutY(16 + y);
+        example.setCellWidth(35);
+        example.setCellHeight(35);
         example.setPadding(new Insets(4, 4, 4, 4));
-        example.setPrefWidth(110);
-        example.setPrefHeight(110);
+        example.setPrefWidth(125);
+        example.setPrefHeight(125);
         example.setStyle("-fx-border-color: BLACK");
         creatBox(example);
 
@@ -118,13 +232,19 @@ public class GameController {
     private TextField creatField() {
 
         TextField textField = new TextField("");
-        textField.setPrefWidth(30);
-        textField.setPrefHeight(30);
+        textField.setPrefWidth(35);
+        textField.setPrefHeight(35);
         textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             saveText(event);
         });
         textField.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
             checkConditions(event);
+
+            if (checkBoxShowMisstakes.isSelected()) {
+                checkCorretions();
+            }
+            setDisableOfRadioButtons();
+            makeBorder();
         });
 
         return textField;
@@ -137,9 +257,12 @@ public class GameController {
                 TextField field = fields[y][x];
 
                 if (ints[y][x] == 0) {
+                    field.setId("emptyNumber");
                     field.setText("");
                 } else {
                     field.setText(String.valueOf(ints[y][x]));
+                    field.setDisable(true);
+                    field.setId("computerNumber");
                 }
             }
         }

@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
 
 <AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameController">
-
+   <children>
+      <JFXRadioButton layoutX="15.0" layoutY="55.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="1">
+         <toggleGroup>
+            <ToggleGroup fx:id="numbersRadio" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton layoutX="15.0" layoutY="80.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="2" toggleGroup="$numbersRadio" />
+      <JFXRadioButton layoutX="15.0" layoutY="105.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="4" toggleGroup="$numbersRadio" />
+      <JFXCheckBox fx:id="checkBoxShowMisstakes" layoutX="38.0" layoutY="304.0" onAction="#checkMisstakes" prefHeight="18.0" prefWidth="121.0" text="Show Mistakes" />
+      <Label fx:id="labelTime" layoutX="60.0" layoutY="21.0" prefHeight="34.0" prefWidth="110.0" text="00:00:00" />
+      <JFXButton fx:id="buttonMenu" layoutX="22.0" layoutY="346.0" prefHeight="34.0" prefWidth="76.0" text="Menu" />
+      <JFXButton fx:id="buttonShowNumber" layoutX="37.0" layoutY="261.0" prefHeight="34.0" prefWidth="104.0" text="Show Number" />
+      <JFXRadioButton layoutX="15.0" layoutY="130.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="5" toggleGroup="$numbersRadio" />
+      <JFXRadioButton layoutX="15.0" layoutY="155.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="6" toggleGroup="$numbersRadio" />
+      <JFXRadioButton layoutX="15.0" layoutY="180.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="7" toggleGroup="$numbersRadio" />
+      <JFXRadioButton layoutX="15.0" layoutY="205.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="8" toggleGroup="$numbersRadio" />
+      <JFXRadioButton layoutX="15.0" layoutY="230.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="9" toggleGroup="$numbersRadio" />
+      <JFXRadioButton layoutX="55.0" layoutY="90.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="3" toggleGroup="$numbersRadio" />
+   </children>
 </AnchorPane>

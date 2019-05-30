@@ -6,9 +6,28 @@
 
     -fx-text-fill: white;
     -fx-font-family: "Forte";
-    -fx-font-size: 17px;
-    -fx-background-color: #0d97ff;
-    -fx-background-radius: 15px;
+    -fx-font-size: 16px;
+    -fx-background-radius: 12px;
     -fx-opacity: 1.0;
     -fx-alignment: center;
+}
+
+#emptyNumber {
+    -fx-background-color: #0d97ff;
+}
+
+#computerNumber {
+    -fx-background-color: #0e5aff;
+}
+
+#wrongNumber {
+    -fx-background-color: #ff6662;
+}
+
+#goodNumber {
+    -fx-background-color: #9aff67;
+}
+
+#selectedNumber {
+
 }
