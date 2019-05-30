@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class GameController {
@@ -46,6 +47,8 @@ public class GameController {
     private int[][] witoutGapInts;
 
     private TimerOfSudoku timer;
+    private JFXRadioButton radioOne;
+    private int counterRadio = 0;
 
     @FXML
     void initialize() {
@@ -53,7 +56,7 @@ public class GameController {
         Sudoku sudoku = new Sudoku();
         sudoku.setValues();
 
-        ints = sudoku.getBoardWithGap(5);
+        ints = sudoku.getBoardWithGap(3);
         witoutGapInts = sudoku.getBoard();
 
         methodsNeededToStart();
@@ -79,8 +82,43 @@ public class GameController {
 
     @FXML
     void changeViewNumber(ActionEvent event) {
-
         makeBorder();
+    }
+
+    @FXML
+    void saveR(MouseEvent event) {
+        radioOne = (JFXRadioButton) numbersRadio.getSelectedToggle();
+    }
+
+    @FXML
+    void unSelR(MouseEvent event) {
+
+        JFXRadioButton radioSecond = (JFXRadioButton) numbersRadio.getSelectedToggle();
+        if (radioOne != null && radioOne == radioSecond) {
+            radioOne.setSelected(false);
+            hiddenBorder();
+        }
+    }
+
+    private void makeBorder() {
+
+        try {
+            JFXRadioButton radio = (JFXRadioButton) numbersRadio.getSelectedToggle();
+            String s = radio.getText();
+
+            for(int y = 0; y < 9; y++) {
+                for(int x = 0; x < 9; x++) {
+
+                    if (fields[y][x].getText().equals(s)) {
+                        fields[y][x].setStyle("-fx-border-color: #00ff99; -fx-border-radius: 12px; -fx-border-width: 3px; -fx-background-color: #00ff99");
+                    } else {
+                        fields[y][x].setStyle("-fx-border-color: white; -fx-border-radius: 12px; -fx-border-width: 2px");
+                    }
+                }
+            }
+
+        } catch (NullPointerException e) {
+        }
     }
 
     private void methodsNeededToStart() {
@@ -91,6 +129,31 @@ public class GameController {
 
         timer = new TimerOfSudoku(this);
         timer.starTimer();
+    }
+
+    private boolean checkIfWin() {
+
+        for(int y = 0; y < 9; y++) {
+            for(int x = 0; x < 9; x++) {
+
+                try {
+                    int temp = Integer.parseInt(fields[y][x].getText());
+
+                    if (witoutGapInts[y][x] != temp) {
+                        return false;
+                    }
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            }
+        }
+        won();
+        return true;
+    }
+
+    private void won() {
+        System.out.println("You've won");
+        timer.stopTimer();
     }
 
     private void setDisableOfRadioButtons() {
@@ -118,32 +181,11 @@ public class GameController {
 
             if (counter >= 9) {
                 radio.setDisable(true);
-                radio.setSelected(false);  /// Bład przy wylaczaniu powinno wyresetowac bordery we wszytkich kafelkach
+                radio.setSelected(false);  // Bład przy wylaczaniu powinno wyresetowac bordery we wszytkich kafelkach - zrobione
                 hiddenBorder();
             } else {
                 radio.setDisable(false);
             }
-        }
-    }
-
-    private void makeBorder() {
-
-        try {
-            JFXRadioButton radio = (JFXRadioButton) numbersRadio.getSelectedToggle();
-            String s = radio.getText();
-
-            for(int y = 0; y < 9; y++) {
-                for(int x = 0; x < 9; x++) {
-
-                    if (fields[y][x].getText().equals(s)) {
-                        fields[y][x].setStyle("-fx-border-color: #00ff99; -fx-border-radius: 12px; -fx-border-width: 3px; -fx-background-color: #00ff99");
-                    } else {
-                        fields[y][x].setStyle("-fx-border-color: white; -fx-border-radius: 12px; -fx-border-width: 2px");
-                    }
-                }
-            }
-
-        } catch (NullPointerException e) {
         }
     }
 
@@ -258,6 +300,7 @@ public class GameController {
             }
             setDisableOfRadioButtons();
             makeBorder();
+            checkIfWin();
         });
 
         return textField;
