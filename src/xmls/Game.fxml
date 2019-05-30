@@ -6,26 +6,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameController">
    <children>
-      <JFXRadioButton layoutX="15.0" layoutY="55.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="1">
+      <JFXRadioButton layoutX="15.0" layoutY="55.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="1" unSelectedColor="#FFFFFF">
          <toggleGroup>
             <ToggleGroup fx:id="numbersRadio" />
          </toggleGroup>
       </JFXRadioButton>
-      <JFXRadioButton layoutX="15.0" layoutY="80.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="2" toggleGroup="$numbersRadio" />
-      <JFXRadioButton layoutX="15.0" layoutY="105.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="4" toggleGroup="$numbersRadio" />
-      <JFXCheckBox fx:id="checkBoxShowMisstakes" layoutX="38.0" layoutY="304.0" onAction="#checkMisstakes" prefHeight="18.0" prefWidth="121.0" text="Show Mistakes" />
-      <Label fx:id="labelTime" layoutX="60.0" layoutY="21.0" prefHeight="34.0" prefWidth="110.0" text="00:00:00" />
-      <JFXButton fx:id="buttonMenu" layoutX="22.0" layoutY="346.0" prefHeight="34.0" prefWidth="76.0" text="Menu" />
-      <JFXButton fx:id="buttonShowNumber" layoutX="37.0" layoutY="261.0" prefHeight="34.0" prefWidth="104.0" text="Show Number" />
-      <JFXRadioButton layoutX="15.0" layoutY="130.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="5" toggleGroup="$numbersRadio" />
-      <JFXRadioButton layoutX="15.0" layoutY="155.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="6" toggleGroup="$numbersRadio" />
-      <JFXRadioButton layoutX="15.0" layoutY="180.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="7" toggleGroup="$numbersRadio" />
-      <JFXRadioButton layoutX="15.0" layoutY="205.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="8" toggleGroup="$numbersRadio" />
-      <JFXRadioButton layoutX="15.0" layoutY="230.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="9" toggleGroup="$numbersRadio" />
-      <JFXRadioButton layoutX="55.0" layoutY="90.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" text="3" toggleGroup="$numbersRadio" />
+      <JFXRadioButton layoutX="15.0" layoutY="81.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="2" toggleGroup="$numbersRadio" unSelectedColor="#FFFFFF" />
+      <JFXRadioButton layoutX="15.0" layoutY="133.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="4" toggleGroup="$numbersRadio" unSelectedColor="#FFFFFF" />
+      <JFXCheckBox fx:id="checkBoxShowMisstakes" checkedColor="#00ff99" layoutX="25.0" layoutY="301.0" onAction="#checkMisstakes" prefHeight="19.0" prefWidth="143.0" text="Show Mistakes" textFill="WHITE" unCheckedColor="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="16.0" />
+         </font></JFXCheckBox>
+      <Label fx:id="labelTime" layoutX="55.0" layoutY="14.0" prefHeight="34.0" prefWidth="110.0" text="00:00:00" />
+      <JFXButton fx:id="buttonMenu" buttonType="RAISED" layoutX="25.0" layoutY="342.0" prefHeight="44.0" prefWidth="94.0" style="-fx-background-color: #006699; -fx-background-radius: 12px;" text="Menu" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font></JFXButton>
+      <JFXRadioButton layoutX="15.0" layoutY="159.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="5" toggleGroup="$numbersRadio" unSelectedColor="#FFFFFF" />
+      <JFXRadioButton layoutX="15.0" layoutY="185.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="6" toggleGroup="$numbersRadio" unSelectedColor="#FFFFFF" />
+      <JFXRadioButton layoutX="15.0" layoutY="211.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="7" toggleGroup="$numbersRadio" unSelectedColor="#FFFFFF" />
+      <JFXRadioButton layoutX="15.0" layoutY="237.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="8" toggleGroup="$numbersRadio" unSelectedColor="#FFFFFF" />
+      <JFXRadioButton layoutX="15.0" layoutY="263.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="9" toggleGroup="$numbersRadio" unSelectedColor="#FFFFFF" />
+      <JFXRadioButton layoutX="15.0" layoutY="107.0" onAction="#changeViewNumber" prefHeight="20.0" prefWidth="40.0" selectedColor="#00ff99" text="3" toggleGroup="$numbersRadio" unSelectedColor="#FFFFFF" />
    </children>
 </AnchorPane>

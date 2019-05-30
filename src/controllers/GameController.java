@@ -1,6 +1,7 @@
 package controllers;
 
 import classes.Sudoku;
+import classes.TimerOfSudoku;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXMasonryPane;
@@ -32,9 +33,6 @@ public class GameController {
     @FXML
     private JFXButton buttonMenu;
 
-    @FXML
-    private JFXButton buttonShowNumber;
-
     private TextField[][] fields = new TextField[9][9];
     private String A;
 
@@ -47,6 +45,8 @@ public class GameController {
     private int[][] ints;
     private int[][] witoutGapInts;
 
+    private TimerOfSudoku timer;
+
     @FXML
     void initialize() {
 
@@ -56,11 +56,7 @@ public class GameController {
         ints = sudoku.getBoardWithGap(5);
         witoutGapInts = sudoku.getBoard();
 
-        creatAllFields();
-        putNumberstoFields();
-        creatBoarder();
-        sudoku.printValues();
-        setDisableOfRadioButtons();
+        methodsNeededToStart();
     }
 
     @FXML
@@ -85,6 +81,16 @@ public class GameController {
     void changeViewNumber(ActionEvent event) {
 
         makeBorder();
+    }
+
+    private void methodsNeededToStart() {
+        creatAllFields();
+        putNumberstoFields();
+        creatBoarder();
+        setDisableOfRadioButtons();
+
+        timer = new TimerOfSudoku(this);
+        timer.starTimer();
     }
 
     private void setDisableOfRadioButtons() {
@@ -113,6 +119,7 @@ public class GameController {
             if (counter >= 9) {
                 radio.setDisable(true);
                 radio.setSelected(false);  /// Bład przy wylaczaniu powinno wyresetowac bordery we wszytkich kafelkach
+                hiddenBorder();
             } else {
                 radio.setDisable(false);
             }
@@ -129,14 +136,22 @@ public class GameController {
                 for(int x = 0; x < 9; x++) {
 
                     if (fields[y][x].getText().equals(s)) {
-                        fields[y][x].setStyle("-fx-border-color: BLACK; -fx-border-radius: 12px; -fx-border-width: 3px");
+                        fields[y][x].setStyle("-fx-border-color: #00ff99; -fx-border-radius: 12px; -fx-border-width: 3px; -fx-background-color: #00ff99");
                     } else {
-                        fields[y][x].setStyle("-fx-border-style: hidden");
+                        fields[y][x].setStyle("-fx-border-color: white; -fx-border-radius: 12px; -fx-border-width: 2px");
                     }
                 }
             }
-        } catch (NullPointerException e) {
 
+        } catch (NullPointerException e) {
+        }
+    }
+
+    private void hiddenBorder() {
+        for(int y = 0; y < 9; y++) {
+            for(int x = 0; x < 9; x++) {
+                fields[y][x].setStyle("-fx-border-color: white; -fx-border-radius: 12px; -fx-border-width: 2px; ");
+            }
         }
     }
 
@@ -152,9 +167,7 @@ public class GameController {
                     try {
                         temp = Integer.parseInt(fields[y][x].getText());
 
-                        if (witoutGapInts[y][x] == Integer.parseInt(fields[y][x].getText())) {
-                            fields[y][x].setId("goodNumber");
-                        } else if (witoutGapInts[y][x] != Integer.parseInt(fields[y][x].getText())) {
+                        if (witoutGapInts[y][x] != Integer.parseInt(fields[y][x].getText())) {
                             fields[y][x].setId("wrongNumber");
                         }
                     } catch (NumberFormatException e) {
@@ -318,5 +331,9 @@ public class GameController {
         }
 
         return false;
+    }
+
+    public void setLabelTime(String s) {
+        labelTime.setText(s);
     }
 }

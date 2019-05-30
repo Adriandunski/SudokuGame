@@ -1,5 +1,12 @@
 .root{
+    -fx-background-color:  #0099cc;
+}
 
+.label {
+    -fx-alignment: center;
+    -fx-text-fill: white;
+    -fx-font-family: "Forte";
+    -fx-font-size: 25px;
 }
 
 .text-field{
@@ -10,6 +17,13 @@
     -fx-background-radius: 12px;
     -fx-opacity: 1.0;
     -fx-alignment: center;
+    -fx-border-color: white;
+}
+
+.jfx-radio-button {
+    -fx-text-fill: white;
+    -fx-font-family: "Forte";
+    -fx-font-size: 16px;
 }
 
 #emptyNumber {
