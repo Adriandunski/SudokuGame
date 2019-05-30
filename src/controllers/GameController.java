@@ -9,13 +9,20 @@ import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class GameController {
 
@@ -30,9 +37,6 @@ public class GameController {
 
     @FXML
     private Label labelTime;
-
-    @FXML
-    private JFXButton buttonMenu;
 
     private TextField[][] fields = new TextField[9][9];
     private String A;
@@ -49,14 +53,20 @@ public class GameController {
     private TimerOfSudoku timer;
     private JFXRadioButton radioOne;
     private int counterRadio = 0;
+    private int miss = 0;
+
+    private SettingsController settingsController;
 
     @FXML
     void initialize() {
 
+        settingsController = SettingsController.getInstance();
+
         Sudoku sudoku = new Sudoku();
         sudoku.setValues();
+        checkLevelGame();
 
-        ints = sudoku.getBoardWithGap(3);
+        ints = sudoku.getBoardWithGap(miss);
         witoutGapInts = sudoku.getBoard();
 
         methodsNeededToStart();
@@ -100,6 +110,27 @@ public class GameController {
         }
     }
 
+    @FXML
+    void actionMenu(ActionEvent event) {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../xmls/MainMenu.fxml"));
+            Scene scene = new Scene(root);
+
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void checkLevelGame() {
+
+        miss = settingsController.getLevel();
+    }
+
     private void makeBorder() {
 
         try {
@@ -126,6 +157,7 @@ public class GameController {
         putNumberstoFields();
         creatBoarder();
         setDisableOfRadioButtons();
+        hiddenBorder();
 
         timer = new TimerOfSudoku(this);
         timer.starTimer();
@@ -378,5 +410,9 @@ public class GameController {
 
     public void setLabelTime(String s) {
         labelTime.setText(s);
+    }
+
+    public void setMiss(int i) {
+        this.miss = i;
     }
 }

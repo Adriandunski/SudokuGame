@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0099cc;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SettingsController">
+   <children>
+      <JFXRadioButton layoutX="138.0" layoutY="58.0" selected="true" selectedColor="#00ff99" text="Classic" textFill="WHITE" unSelectedColor="#FFFFFF">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="theKindOfGame" />
+         </toggleGroup></JFXRadioButton>
+      <JFXRadioButton disable="true" layoutX="363.0" layoutY="58.0" selectedColor="#00ff99" text="Cross" textFill="WHITE" toggleGroup="$theKindOfGame" unSelectedColor="#FFFFFF">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font></JFXRadioButton>
+      <JFXButton layoutX="223.0" layoutY="286.0" onAction="#startGame" prefHeight="56.0" prefWidth="155.0" style="-fx-background-color: #006699; -fx-background-radius: 12px; -fx-border-radius: 12px; -fx-border-color: #FFFFFF; -fx-border-width: 2px;" text="Start" textFill="WHITE">
+         <font>
+            <Font size="28.0" />
+         </font></JFXButton>
+      <JFXRadioButton layoutX="97.0" layoutY="185.0" selectedColor="#00ff99" text="Easy" textFill="WHITE" unSelectedColor="#FFFFFF">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="stepLevel" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton layoutX="246.0" layoutY="185.0" selected="true" selectedColor="#00ff99" text="Normal" textFill="WHITE" toggleGroup="$stepLevel" unSelectedColor="#FFFFFF">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXRadioButton layoutX="406.0" layoutY="185.0" selectedColor="#00ff99" text="Difficult" textFill="WHITE" toggleGroup="$stepLevel" unSelectedColor="#FFFFFF">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+      </JFXRadioButton>
+   </children>
+</AnchorPane>

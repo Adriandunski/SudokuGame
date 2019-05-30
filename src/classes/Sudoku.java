@@ -285,7 +285,7 @@ public class Sudoku {
                 counter++;
             }
         } while (counter < miss); {
-            System.out.println("Koniec pętli");
+
         }
 
         return array;

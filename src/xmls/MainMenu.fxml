@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.MainMenuController"
-            prefHeight="400.0" prefWidth="600.0">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0099cc;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainMenuController">
+   <children>
+      <JFXButton buttonType="RAISED" layoutX="175.0" layoutY="175.0" onAction="#actionStartSudoku" prefHeight="75.0" prefWidth="251.0" style="-fx-background-color: #006699; -fx-background-radius: 12px; -fx-border-radius: 12px; -fx-border-color: #FFFFFF; -fx-border-width: 2px;" text="Start Sudoku" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="248.0" layoutY="278.0" onAction="#actionExit" prefHeight="42.0" prefWidth="105.0" style="-fx-background-color: #1E90FF; -fx-background-radius: 12px; -fx-border-color: #FFFFFF; -fx-border-radius: 12px; -fx-border-width: 2px;" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
 </AnchorPane>
