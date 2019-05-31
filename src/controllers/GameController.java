@@ -14,9 +14,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -186,6 +184,9 @@ public class GameController {
     private void won() {
         System.out.println("You've won");
         timer.stopTimer();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "You Won ", ButtonType.FINISH);
+        alert.show();
     }
 
     private void setDisableOfRadioButtons() {
