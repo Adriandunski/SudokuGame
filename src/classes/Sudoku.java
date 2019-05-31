@@ -25,7 +25,6 @@ public class Sudoku {
 
     public void initialRestSquare() {
 
-        long timeStart = System.currentTimeMillis();
         do {
             clearMap();
 
@@ -263,20 +262,16 @@ public class Sudoku {
     }
 
     public int[][] getBoard() {
-
         return numbers;
     }
 
     public int[][] getBoardWithGap(int miss) {
 
         int array[][] = copyArray(numbers);
-
         SecureRandom secureRandom = new SecureRandom();
         int counter = 0;
-        boolean w = false;
 
         do {
-
             int y = secureRandom.nextInt(9);
             int x = secureRandom.nextInt(9);
 
@@ -285,22 +280,18 @@ public class Sudoku {
                 counter++;
             }
         } while (counter < miss); {
-
+            return array;
         }
-
-        return array;
     }
 
     private int[][] copyArray(int[][] oldArray) {
 
         int newArray[][] = new int[9][9];
-
         for(int y = 0; y < 9; y++) {
             for(int x = 0; x < 9; x++) {
                 newArray[y][x] = oldArray[y][x];
             }
         }
-
         return newArray;
     }
 }

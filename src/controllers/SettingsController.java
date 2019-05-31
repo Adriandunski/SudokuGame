@@ -35,7 +35,6 @@ public class SettingsController {
 
         try {
             FXMLLoader loader = new FXMLLoader();
-
             Parent root = loader.load(getClass().getResource("../xmls/Game.fxml"));
 
             Scene scene = new Scene(root);

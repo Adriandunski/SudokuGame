@@ -393,7 +393,6 @@ public class GameController {
                 temp = s;
             }
         }
-
         textField.setText(temp);
     }
 
@@ -404,7 +403,6 @@ public class GameController {
                 return true;
             }
         }
-
         return false;
     }
 

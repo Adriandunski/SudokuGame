@@ -23,15 +23,5 @@ public class Main extends Application {
         primaryStage.setTitle("Sudoku");
         primaryStage.setResizable(false);
         primaryStage.show();
-
-
-//        Parent root = FXMLLoader.load(getClass().getResource("../xmls/Game.fxml"));
-//        Scene scene = new Scene(root);
-//        scene.getStylesheets().add("xmls/styleGame.css");
-//
-//        primaryStage.setScene(scene);
-//        primaryStage.setTitle("Sudoku");
-//        primaryStage.setResizable(false);
-//        primaryStage.show();
     }
 }
